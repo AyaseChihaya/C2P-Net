@@ -50,7 +50,7 @@ The pretrained models are stored on Google Drive due to large file sizes.
 
 You can download all models and place them into:
 - `C2P-panoramic/trained_model/`
-  `C2P-panoramic/pretrained_model/swin_transformer`
+- `C2P-panoramic/pretrained_model/swin_transformer/`
 - `C2P-perspective/trained_model/`
 
 # Visual results
