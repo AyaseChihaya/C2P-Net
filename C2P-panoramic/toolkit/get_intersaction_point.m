@@ -1,0 +1,5 @@
+function [u,v,d] = get_intersaction_point(model)
+
+u = (model(1, 2)*model(2, 3) - model(1, 3)*model(2, 2) - model(1, 2)*model(3, 3) + model(1, 3)*model(3, 2) + model(2, 2)*model(3, 3) - model(2, 3)*model(3, 2))/(model(1, 1)*model(2, 2) - model(1, 2)*model(2, 1) - model(1, 1)*model(3, 2) + model(1, 2)*model(3, 1) + model(2, 1)*model(3, 2) - model(2, 2)*model(3, 1));
+v = -(model(1, 1)*model(2, 3) - model(2, 1)*model(1, 3) - model(1, 1)*model(3, 3) + model(1, 3)*model(3, 1) + model(2, 1)*model(3, 3) - model(3, 1)*model(2, 3))/(model(1, 1)*model(2, 2) - model(1, 2)*model(2, 1) - model(1, 1)*model(3, 2) + model(1, 2)*model(3, 1) + model(2, 1)*model(3, 2) - model(2, 2)*model(3, 1));
+d = (model(1, 1)*model(2, 2)*model(3, 3) - model(1, 1)*model(2, 3)*model(3, 2) - model(1, 2)*model(2, 1)*model(3, 3) + model(1, 2)*model(3, 1)*model(2, 3) + model(2, 1)*model(1, 3)*model(3, 2) - model(1, 3)*model(2, 2)*model(3, 1))/(model(1, 1)*model(2, 2) - model(1, 2)*model(2, 1) - model(1, 1)*model(3, 2) + model(1, 2)*model(3, 1) + model(2, 1)*model(3, 2) - model(2, 2)*model(3, 1));
