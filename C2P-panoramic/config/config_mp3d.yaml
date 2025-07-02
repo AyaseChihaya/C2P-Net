@@ -1,0 +1,72 @@
+dataset_args:
+    type: 'Matterport3DDataset'
+    train:
+        mode: 'train1'
+        shape: &shape [512, 1024]
+        shape1: &shape1 [128, 256]
+        dataset_image_path: '/home/ps/data/Z/matterport_dataset/train/dataset/image/'
+        dataset_label_path: '/home/ps/data/Z/matterport_dataset/train/dataset/label'
+        dataset_layout_depth_path: '/home/ps/data/Z/matterport_dataset/train/dataset/depth_map1/'
+        dataset_depth_path: '/home/ps/data/Z/matterport_dataset/train/dataset/depth/'
+        dataset_seg_path: '/home/ps/data/Z/matterport_dataset/train/dataset/seg/'
+        image_name: &image_name '.png'
+        depth_name: &depth_name 'vis.png'
+        wall_types: &wall_types [4, 6, 8, 10, 12]
+        camera_height: &camera_height 1.6
+        aug:
+            flip: True
+            stretch: True
+            concat: True
+            gamma: True
+        loader_args:
+            batch_size: 4
+            num_workers: &num_workers 0
+            shuffle: True
+            drop_last: True
+            pin_memory: True
+    val:
+        mode: 'test' ####### Important
+        shape: *shape
+        dataset_image_path: '/home/ps/data/Z/Matterport(idea2)/mp3d2/test/'
+        dataset_label_path: '/home/ps/data/Z/Matterport(idea2)/mp3d2/label/label_test/'
+        dataset_depth_path: '/home/ps/data/Z/Matterport(idea2)/mp3d1/depth_gray/'
+        image_name: *image_name
+        depth_name: *depth_name
+        wall_types: *wall_types
+        camera_height: *camera_height
+        aug:
+            flip: False
+            stretch: False
+            rotate: False
+            gamma: False
+        loader_args:
+            batch_size: 1
+            num_workers: *num_workers
+            shuffle: False
+            drop_last: False
+            pin_memory: True
+optimizer_args:
+    type: 'Adam'
+    args:
+        lr: 0.0003
+loss_args:
+    camera_height: *camera_height
+metric_args:
+    field_names: ['IoU_2D', 'IoU_3D']
+network_args:
+    save_path: './save'
+    backbone: 'resnet50'
+exp_args:
+    seed: 229
+    epoch: 1000
+    device: 'cuda:1'
+    multi-gpu: False
+    exp_path: './experiment'
+    exp_freq: 200
+    camera_height: *camera_height
+    visualizer_args:
+        cube_dim: 256
+        equi_shape: *shape
+        camera_FoV: 160
+        fp_dim: 512
+        fp_meters: 20
