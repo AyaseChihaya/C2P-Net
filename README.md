@@ -4,6 +4,8 @@ This is PyTorch implementation of our paper "C2P-Net：Comprehensive Depth Map t
 
 Room layout estimation seeks to infer the overall spatial configuration of indoor scenes using perspective or panoramic images. As the layout is determined by the dominant indoor planes, this problem inherently requires the reconstruction of these planes. Some studies reconstruct indoor planes from perspective images by learning pixel-level or instance-level plane parameters. However, directly learning these parameters has the problems of susceptibility to occlusions and position dependency. In this paper, we introduce the Comprehensive depth map to Planar depth (C2P) conversion, which reformulates planar depth reconstruction into the prediction of a comprehensive depth map and planar visibility confidence. Based on the parametric representation of planar depth we propose, the C2P conversion is applicable to both panoramic and perspective images. Accordingly, we present an effective framework for room layout estimation that jointly learns the comprehensive depth map and planar visibility confidence. Due to the differentiability of the C2P conversion, our network autonomously learns planar visibility confidence by constraining the estimated plane parameters and reconstructed planar depth map. We further propose a novel approach for 3D layout generation through sequential planar depth map integration. Experimental results demonstrate the superiority of our method across all evaluated panoramic and perspective datasets.
 
+[Project Website](https://github.com/AyaseChihaya/C2P-Net) • [Paper](https://ieeexplore.ieee.org/stamp/stamp.jsp?tp=&arnumber=10878466)
+
 # Code
 
 ## C2P-panoramic (Panoramic Images)
@@ -81,6 +83,23 @@ You can download all models and place them into:
 
 #### Perspective-image-based layout estimation
 ![The visual results of perspective layout estimation on Matterport3D-Layout and InteriorNet-Layout datasets.](figure/pers_visual3.png)
+
+## Citation
+
+If you use this project in your research, please cite the following paper:
+
+```bibtex
+@ARTICLE{10878466,
+  author={Zhang, Weidong and Zhou, Mengjie and Cheng, Jiyu and Liu, Ying and Zhang, Wei},
+  journal={IEEE Transactions on Pattern Analysis and Machine Intelligence}, 
+  title={C2P-Net: Comprehensive Depth Map to Planar Depth Conversion for Room Layout Estimation}, 
+  year={2025},
+  volume={47},
+  number={7},
+  pages={5350-5367},
+  keywords={Layout;Three-dimensional displays;Image reconstruction;Estimation;Cameras;Floors;Cognition;Transforms;Training;Semantics;Room layout estimation;monocular depth estimation;planar depth reconstruction;planar visibility confidence},
+  doi={10.1109/TPAMI.2025.3540084}}
+```
 
 # Contact
 Email | chluzhre@gmail.com, davidzhang@sdu.edu.cn
