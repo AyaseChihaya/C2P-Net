@@ -52,24 +52,36 @@ Python 3.7
 
 The pretrained models are stored on Google Drive due to large file sizes.
 
-| Model Name | Download Link |
-|------------|----------------|
-| C2P-panoramic Models |
-  | trained_model |
-  | `matterport.pth.tar` | [Download](https://drive.google.com/file/d/1U-6uPH6xPEDmi6Um7v0qXnwVq3kC6fYS/view?usp=drive_link) |
-  | `pano.pth.tar`       | [Download](https://drive.google.com/file/d/16y3N-KJdXrWxJoZ80CGxh9V65oNoS4Hl/view?usp=drive_link) |
-  | `stanford.pth.tar`   | [Download](https://drive.google.com/file/d/1VSA4-i6wJMNsvDZrt2WD9tucrwKSawD5/view?usp=drive_link) |
-  | `zind.pth.tar`       | [Download](https://drive.google.com/file/d/1WwQ89prubzSwKr8O1WaZLY1WRKGzMVkE/view?usp=drive_link) |
-  | pretrained_model |
-  | `swin_large_patch4_window7_224_22k.tar`       | [Download](https://drive.google.com/file/d/1FWpnsrRur1xOu6hOf3ClO-t9TGCY9aiX/view?usp=drive_link) |
-  
-|------------|----------------|
-| C2P-perspective Models |
-  | trained_model |
-  | `matterport_model.tar` | [Download](https://drive.google.com/file/d/15LE66F9osi9OZ2tmz0_AxqkP8ygJmscf/view?usp=drive_link) |
-  | `model_interior.pth.tar`       | [Download](https://drive.google.com/file/d/1dEfYAjziy1uZrPHeIewTVa8fSKnkrMoQ/view?usp=drive_link) |
-  | `model_lsun.pth.tar`   | [Download](https://drive.google.com/file/d/11-T_FO2Mm0WyXFeOEds1nWkcgS5c67-3/view?usp=drive_link) |
-  | `model_nyu.pth.tar`       | [Download](https://drive.google.com/file/d/1jDCt1ppuHQ8fnKLrTIOXF-LKkyjlbNWk/view?usp=drive_link) |
+## 📦 C2P-panoramic Models
+
+### 🔧 trained_model
+
+| File Name          | Download Link |
+|--------------------|----------------|
+| matterport.pth.tar | [Download](https://drive.google.com/file/d/1U-6uPH6xPEDmi6Um7v0qXnwVq3kC6fYS/view?usp=drive_link) |
+| pano.pth.tar       | [Download](https://drive.google.com/file/d/16y3N-KJdXrWxJoZ80CGxh9V65oNoS4Hl/view?usp=drive_link) |
+| stanford.pth.tar   | [Download](https://drive.google.com/file/d/1VSA4-i6wJMNsvDZrt2WD9tucrwKSawD5/view?usp=drive_link) |
+| zind.pth.tar       | [Download](https://drive.google.com/file/d/1WwQ89prubzSwKr8O1WaZLY1WRKGzMVkE/view?usp=drive_link) |
+
+### 🔍 pretrained_model
+
+| File Name                              | Download Link |
+|----------------------------------------|----------------|
+| swin_large_patch4_window7_224_22k.tar | [Download](https://drive.google.com/file/d/1FWpnsrRur1xOu6hOf3ClO-t9TGCY9aiX/view?usp=drive_link) |
+
+---
+
+## 📦 C2P-perspective Models
+
+### 🔧 trained_model
+
+| File Name           | Download Link |
+|---------------------|----------------|
+| matterport_model.tar | [Download](https://drive.google.com/file/d/15LE66F9osi9OZ2tmz0_AxqkP8ygJmscf/view?usp=drive_link) |
+| model_interior.pth.tar | [Download](https://drive.google.com/file/d/1dEfYAjziy1uZrPHeIewTVa8fSKnkrMoQ/view?usp=drive_link) |
+| model_lsun.pth.tar      | [Download](https://drive.google.com/file/d/11-T_FO2Mm0WyXFeOEds1nWkcgS5c67-3/view?usp=drive_link) |
+| model_nyu.pth.tar       | [Download](https://drive.google.com/file/d/1jDCt1ppuHQ8fnKLrTIOXF-LKkyjlbNWk/view?usp=drive_link) |
+
 
 
 You can download all models and place them into:
