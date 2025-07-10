@@ -60,7 +60,7 @@ for i = 1:length(d)
         layout_map = squeeze(layout_map);
         weight = squeeze(weight(1,1,:,:));
     
-    
+        mask_raw = permute(squeeze(segmentation),[2,3,1]);
         loc_mat = (1 ./ ( 1 + exp(-squeeze(center_map))))';
         [plane_cent, loc_coord] = nms_v2(loc_mat, mask_raw,coord_x,coord_y, threshold_conf, threshold_dice);
         [row,col] = find(plane_cent==1);
@@ -238,7 +238,7 @@ for i = 1:length(d)
         layout_map = squeeze(layout_map);
         weight = squeeze(weight_flip(1,1,:,:));
         
-        
+        mask_raw = permute(squeeze(segmentation),[2,3,1]);
         loc_mat = (1 ./ ( 1 + exp(-squeeze(center_map_flip))))';
         [plane_cent, loc_coord] = nms_v2(loc_mat, mask_raw,coord_x,coord_y, threshold_conf, threshold_dice);
         [row,col] = find(plane_cent==1);

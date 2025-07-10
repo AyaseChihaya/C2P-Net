@@ -57,53 +57,9 @@ for i = 1:length(d)
         %         valid = pred_inv_depth > 0;
         pred_depth = 1 ./ (pred_inv_depth + 1e-10);
         valid = (pred_depth > 0.1) & (pred_depth < 30);
-        %         imshow(pred_depth/10)
-        
-%         max_value = max(max(pred_depth));
-%         min_value = min(min(pred_depth));
-%         pred_depth1 = (pred_depth - min_value)./(max_value - min_value); 
-%         pred_depth1 = imresize(pred_depth,sz);
-%         small = min(min(pred_depth1));
-%         big = max(max(pred_depth1));
-% 
-% % %         设置自定义的颜色范围
-%         color_min = small; % 自定义颜色范围的最小值
-%         color_max = big+1; % 自定义颜色范围的最大值
-%         colormap jet; % 使用 parula 颜色映射
-%         imagesc(pred_depth1);
-%         caxis([color_min, color_max]); axis off;%colorbar;
-%         path1 = '/home/ubuntu/zmj/result_mp3d/layout_depth/depth/';
-%         filname = [path1 num2str(i,'%04d') '.png'];
-%         print(gcf,filname,'-dpng','-r300');
-%  
 
         plane = squeeze(output3); 
         weight = imresize(plane,sz);
-% 
-        weight(weight<0.01)=0;
-%         weight = weight*0.1;
-%         wm = max(max(weight));
-%         beishu = 255/wm;
-%         weight = weight*beishu;
-%         vv = round(max(max(weight)));
-
-%         big = max(max(weight));
-%         small = min(min(weight));
-%         color_min = 0; % 自定义颜色范围的最小值
-%         color_max = big-0.05; % 自定义颜色范围的最大值
-%         colormap hot; 
-%         imagesc(weight);
-%         caxis([color_min, color_max]); axis off;%colorbar;
-% %         set(gcf, 'Position', [100, 100, 1024, 1280]);colorbar;
-% % 
-% %         imshow(weight,[]);
-% %         colormap('hot');
-% %         colormap(hot(vv)); %colorbar
-% % 
-%         path2 = '/home/ubuntu/zmj/result_mp3d/weight/weight/';
-%         filname = [path2 num2str(i,'%04d') '.png'];
-%         print(gcf,filname,'-dpng','-r300');
-
  
         mask_raw = permute(squeeze(output2),[2,3,1]);
         mask_u = mask_raw(:,:,1:grid_x);
@@ -130,14 +86,6 @@ for i = 1:length(d)
             tmp_seg = mask_u(:,:,col(f)) .* mask_v(:,:,row(f));
 %             imwrite(tmp_seg,'1.png')
             tmp_mask = tmp_seg .* plane .* valid;
-%             tmp_mask = imresize(tmp_mask,sz);
-%             wm = max(max(tmp_mask));
-%             beishu = 255/wm;
-%             tmp_mask(tmp_mask<0.01)=0;
-%             tmp_mask = tmp_mask*beishu;   
-%             vv = round(max(max(tmp_mask)));
-%             imshow(tmp_mask,[]);
-%             colormap(hot(vv));
             
             tmp_seg_mask(:,:,f) = imresize(tmp_seg,sz);
             cent_x = loc_coord(row(f), col(f), 1);
@@ -168,76 +116,10 @@ for i = 1:length(d)
         
         [~, seg_mask] = max(tmp_seg_mask,[],3);
         
-%         r = zeros(size(seg_mask));
-%         g = zeros(size(seg_mask));
-%         b = zeros(size(seg_mask));
-% 
-%         cl =1;%赤红色
-%         r(seg_mask ==cl) = 220;
-%         g(seg_mask ==cl) = 20;
-%         b(seg_mask ==cl) = 60;
-% 
-%         cl =2;%春天绿色
-%         r(seg_mask ==cl) = 0;
-%         g(seg_mask ==cl) = 255;
-%         b(seg_mask ==cl) = 127;
-% 
-%         cl =3;%紫色
-%         r(seg_mask ==cl) = 238;
-%         g(seg_mask ==cl) = 130;
-%         b(seg_mask ==cl) = 238;
-% 
-%         cl =4; %道奇蓝
-%         r(seg_mask ==cl) = 30;
-%         g(seg_mask ==cl) = 144;
-%         b(seg_mask ==cl) = 255;
-% 
-%         cl =5;%深橙色
-%         r(seg_mask ==cl) = 255;
-%         g(seg_mask ==cl) = 140;
-%         b(seg_mask ==cl) = 0;
-% 
-%         cl =6;%沙棕色
-%         r(seg_mask ==cl) = 255;
-%         g(seg_mask ==cl) = 215;
-%         b(seg_mask ==cl) = 255;
-% 
-% 
-%         cl =7; %金色
-%         r(seg_mask ==cl) = 255;
-%         g(seg_mask ==cl) = 215;
-%         b(seg_mask ==cl) = 0;
-% 
-%         cl =8; %草绿色
-%         r(seg_mask ==cl) = 0;
-%         g(seg_mask ==cl) = 128;
-%         b(seg_mask ==cl) = 0;
-% 
-%         cl =9; %紫罗兰
-%         r(seg_mask ==cl) = 138;
-%         g(seg_mask ==cl) = 43;
-%         b(seg_mask ==cl) = 226;
-%         
-%         c = uint8(cat(3,r,g,b));
-%         imshow(c,[]);
-%         path = '/home/ps/data/Z/test_image_seg/';
-%         imwrite(c,[path num2str(i,'%04d') '.png']);
+
         
         
         [~, sort_map] = sort(inv_pd,3);
-%         inv_pd(inv_pd<0)=Inf;
-%         inv_pd_Z = 1./(inv_pd + 1e-10);
-%         pd = permute(inv_pd_Z,[3,1,2]);
-%         shendu = squeeze(pd(5,:,:));
-%         small = min(min(shendu));
-%         big = max(max(shendu));
-%         color_min =1; % 自定义颜色范围的最小值
-%         color_max =9.5; % 2.1
-% %         colormap(flipud(jet)) %颜色相反
-%         colormap jet;
-%         imagesc(shendu);
-%         caxis([color_min, color_max]); axis off;%colorbar;
-%         set(gcf, 'Position', [100, 100, 1024, 1280]);
         
         
         layout_seg = sort_map(:,:,end); 
@@ -274,32 +156,6 @@ for i = 1:length(d)
             score_layer = pixelwiseAccuracy(seg_mask, layout_seg, sz) - (length(unique(layout_seg))==1) - (min(layout_inv_depth(:)) < 0) * 0.1;
             layout_inv_depth_layer = layout_inv_depth;
             layout_seg_layer = layout_seg;
-% %             
-%             depth_Z = 1./layout_inv_depth;
-%             max_value1 = max(max(depth_Z));
-%             min_value1 = min(min(depth_Z));
-%             weight_preddepth = (depth_Z - min_value1)./(max_value1 - min_value1); 
-%             
-%             
-% %             设置自定义的颜色范围
-%             big = max(max(weight_preddepth));
-%             small = min(min(weight_preddepth));
-%             color_min = -0.2; % 自定义颜色范围的最小值
-%             color_max = 1.2; % 自定义颜色范围的最大值
-%             colormap jet; % 使用 parula 颜色映射
-%             imagesc(weight_preddepth);
-%             caxis([color_min, color_max]); axis off;
-% %             set(gcf, 'Position', [100, 100, 1024, 1280]);%colorbar;
-%             path1 = '/home/ubuntu/zmj/result_mp3d/depth/weight_depth1/';
-%             filname = [path1 num2str(i,'%04d') '.png'];
-%             print(gcf,filname,'-dpng','-r300');
-% 
-%             imshow(depth_Z,[]);
-%             colormap(jet(256));
-%             path_weight_preddepth = '/home/ubuntu/zmj/result_mp3d/depth/weight_depth/';
-%             filname = [path_weight_preddepth num2str(i,'%04d') '.png'];
-%             print(gcf,filname,'-dpng','-r300');
-
  
             model_new = [];
             ceil_inf = [];
@@ -562,99 +418,6 @@ for i = 1:length(d)
     
     layout_depth = 1./layout_inv_depth;
 
-%     imwrite(uint16(layout_seg * 4000),['/home/ps/data/Z/test_image_seg/' num2str(i,'%04d') '_seg.png'])
-%     imwrite(uint16(layout_depth * 4000),['/home/ps/data/Z/test_image_depth/' num2str(i,'%04d') '_layout.png'])
-  
-    max_value1 = max(max(layout_depth));
-    min_value1 = min(min(layout_depth));
-    pinjie_preddepth = (layout_depth - min_value1)./(max_value1 - min_value1); 
-    
-    color_min = -0.4; % 自定义颜色范围的最小值
-    color_max = 1.4; % 自定义颜色范围的最大值
-    colormap jet; % 使用 parula 颜色映射
-    imagesc(pinjie_preddepth);
-    caxis([color_min, color_max]); axis off;
-%         set(gcf, 'Position', [100, 100, 1024, 1280]);%colorbar;
-    path_pinjie_preddepth = '//home/ps/data/Z/test_image_depth/';
-    filname = [path_pinjie_preddepth num2str(i,'%04d') '.png'];
-    print(gcf,filname,'-dpng','-r300');
-
-
-
-    r = zeros(size(layout_seg));
-    g = zeros(size(layout_seg));
-    b = zeros(size(layout_seg));
-
-    cl =1;%赤红色
-    r(layout_seg ==cl) = 220;
-    g(layout_seg ==cl) = 20;
-    b(layout_seg ==cl) = 60;
-
-    cl =2;%春天绿色
-    r(layout_seg ==cl) = 0;
-    g(layout_seg ==cl) = 255;
-    b(layout_seg ==cl) = 127;
-
-    cl =3;%紫色
-    r(layout_seg ==cl) = 238;
-    g(layout_seg ==cl) = 130;
-    b(layout_seg ==cl) = 238;
-
-    cl =4; %道奇蓝
-    r(layout_seg ==cl) = 30;
-    g(layout_seg ==cl) = 144;
-    b(layout_seg ==cl) = 255;
-
-    cl =5;%深橙色
-    r(layout_seg ==cl) = 255;
-    g(layout_seg ==cl) = 140;
-    b(layout_seg ==cl) = 0;
-
-    cl =6;%沙棕色
-    r(layout_seg ==cl) = 255;
-    g(layout_seg ==cl) = 215;
-    b(layout_seg ==cl) = 255;
-
-
-    cl =7; %金色
-    r(layout_seg ==cl) = 255;
-    g(layout_seg ==cl) = 215;
-    b(layout_seg ==cl) = 0;
-
-    cl =8; %草绿色
-    r(layout_seg ==cl) = 0;
-    g(layout_seg ==cl) = 128;
-    b(layout_seg ==cl) = 0;
-
-    cl =9; %紫罗兰
-    r(layout_seg ==cl) = 138;
-    g(layout_seg ==cl) = 43;
-    b(layout_seg ==cl) = 226;
-        
-    c = uint8(cat(3,r,g,b));
-%     imshow(c,[]);
-    path = '/home/ps/data/Z/test_image_seg/';
-    imwrite(c,[path num2str(i,'%04d') '.png']);
-
-    
-    
-%     layout_seg = imresize(layout_seg,[320,400]);
-%     layout_edge = edge(layout_seg,'canny');
-%     se = strel('disk',4);
-%     layout_edge = imdilate(layout_edge,se);  
-%     img = imresize(img,[320,400]);
-%     img_edge = img;
-%     img_edge(:,:,2) = img_edge(:,:,2)+uint8(layout_edge*255) ;
-% %     seg = imresize(seg,[320,400]);
-% %     gt_edge = edge(seg,'canny');
-% %     gt_edge = imdilate(gt_edge,se);
-% %     img_edge(:,:,1) = img_edge(:,:,1)+uint8(gt_edge*255);
-%    
-%   
-%     imshow(img_edge,[]);
-%     path = '/home/ps/data/Z/test_image_layout/';
-%     imwrite(img_edge,[path num2str(i,'%04d') '.png']);   
-    
 
 
 %     try
